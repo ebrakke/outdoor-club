@@ -14,7 +14,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   switch (node.internal.type) {
     case 'MarkdownRemark': {
       const { permalink, layout } = node.frontmatter
-      const { relativePath } = getNode(node.parent)
 
       let slug = permalink
 
@@ -83,4 +82,21 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
+}
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+		type MarkdownRemark implements Node {
+			frontmatter: Frontmatter
+		}
+
+		type Frontmatter {
+		  sections: [Section]
+		}
+		type Section {
+      image: File @fileByRelativePath
+		}
+  `
+  createTypes(typeDefs)
 }

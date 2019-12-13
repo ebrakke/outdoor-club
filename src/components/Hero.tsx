@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     position: 'relative',
     height: 250,
-    backgroundImage: (props: Props) => `url(${props.image.childImageSharp.fluid.src})`,
+    backgroundImage: (props: Props) => `url(${props.image ? props.image.childImageSharp.fluid.src : ''})`,
     backgroundPosition: 'center',
     color: theme.palette.grey[200],
   },
@@ -33,8 +33,8 @@ const useStyles = makeStyles(theme => ({
 
 type Props = {
   header: string
-  image: {
-    childImageSharp?: {
+  image?: {
+    childImageSharp: {
       fluid: FluidObject
     }
   }
@@ -45,11 +45,11 @@ export const Hero = (props: Props) => {
   return (
     <div className={classes.root}>
       <div className={classes.overlay}>
-        <Typography variant="h5" align="center">
+        <Typography variant="h4" align="center">
           {props.header}
         </Typography>
         <div className={classes.donateButton}>
-          <Button>Donate</Button>
+          <Button variant="filled">Donate</Button>
         </div>
       </div>
     </div>

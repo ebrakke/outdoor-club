@@ -2,9 +2,9 @@
 
 module.exports = {
   siteMetadata: {
-    title: 'Colorado Mountain Club',
-    description: 'Website for Colorado Mountain Club',
-    siteUrl: 'https://www.cmc.org',
+    title: 'Outdoors Club America',
+    description: 'Website for an outdoors club',
+    siteUrl: 'http://www.example.com',
     author: {
       name: 'Erik Brakke',
       url: 'https://www.ebrakke.com/',
