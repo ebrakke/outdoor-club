@@ -1,9 +1,10 @@
-'use strict'
-
 const path = require('path')
+const { createFilePath } = require('gatsby-source-filesystem')
+const { fmImagesToRelative } = require('gatsby-remark-relative-images')
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
+  fmImagesToRelative(node)
 
   // Sometimes, optional fields tend to get not picked up by the GraphQL
   // interpreter if not a single content uses it. Therefore, we're putting them
@@ -18,21 +19,21 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       let slug = permalink
 
       if (!slug) {
-        slug = `/${relativePath.replace('.md', '')}/`
+        slug = createFilePath({ node, getNode })
       }
 
       // Used to generate URL to view this content.
       createNodeField({
         node,
         name: 'slug',
-        value: slug || ''
+        value: slug || '',
       })
 
       // Used to determine a page layout.
       createNodeField({
         node,
         name: 'layout',
-        value: layout || ''
+        value: layout || '',
       })
     }
   }
@@ -78,8 +79,8 @@ exports.createPages = async ({ graphql, actions }) => {
       component: path.resolve(`./src/templates/${layout || 'page'}.tsx`),
       context: {
         // Data passed to context is available in page queries as GraphQL variables.
-        slug
-      }
+        slug,
+      },
     })
   })
 }
