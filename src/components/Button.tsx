@@ -11,6 +11,12 @@ const useStyles = makeStyles(theme => ({
     height: 50,
     boxShadow: (props: Props) => (props.variant === 'default' ? '' : '2px 2px 2px rgba(0, 0, 0, 0.25)'),
     border: 'none',
+    outline: 'none',
+
+    '&:active': {
+      transform: 'translateY(2px)',
+      boxShadow: '0 0 0',
+    },
   },
 }))
 

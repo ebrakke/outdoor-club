@@ -2,10 +2,11 @@ import * as React from 'react'
 import Helmet from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 import { ThemeProvider } from '@material-ui/core/styles'
+import { CssBaseline } from '@material-ui/core'
+import 'normalize.css/normalize.css'
 
 import Navbar from '../components/Navbar'
 import theme from '../theme'
-import { CssBaseline } from '@material-ui/core'
 
 interface StaticQueryProps {
   site: {
@@ -36,7 +37,7 @@ const IndexLayout: React.FC = ({ children }) => {
         title={data.site.siteMetadata.title}
         meta={[
           { name: 'description', content: data.site.siteMetadata.description },
-          { name: 'keywords', content: data.site.siteMetadata.keywords }
+          { name: 'keywords', content: data.site.siteMetadata.keywords },
         ]}
       />
       <Navbar title={data.site.siteMetadata.title} />
